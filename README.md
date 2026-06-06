@@ -173,5 +173,5 @@ using engineered athletic and positional features combined with multi-seed model
 * Deep learning tabular models
 
 ## Author
-
+Saumya Vijayvargiya
 Developed as a machine learning solution for NFL Draft prediction using gradient boosting ensembles and advanced feature engineering.
