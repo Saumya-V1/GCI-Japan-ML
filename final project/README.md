@@ -114,11 +114,17 @@ Examples:
 
 ## Machine Learning Model
 
-### Algorithm
+### Model Selection
 
-XGBoost Classifier
+Three candidate algorithms were trained and compared using 5-fold stratified cross-validation on ROC-AUC:
 
-### Model Configuration
+* Logistic Regression (with class balancing)
+* Random Forest Classifier
+* XGBoost Classifier
+
+**XGBoost performed best** and was selected as the final model.
+
+### Final Model Configuration (XGBoost)
 
 * 500 Estimators
 * Learning Rate: 0.03
@@ -131,8 +137,8 @@ XGBoost Classifier
 ### Validation Strategy
 
 * Stratified Train/Test Split
-* Early Stopping Validation Set
-* 5-Fold Stratified Cross Validation
+* 5-Fold Stratified Cross Validation (used for model comparison)
+* Early Stopping Validation Set (applied to the selected XGBoost model)
 
 ---
 
@@ -144,6 +150,8 @@ The project uses SHAP (SHapley Additive exPlanations) to:
 * Explain individual predictions
 * Increase stakeholder trust
 * Support business decision-making
+
+The SHAP explainer is automatically selected based on the winning model type (tree-based or linear).
 
 Visual outputs include:
 
@@ -162,7 +170,7 @@ Visual outputs include:
 * Accuracy
 * Cross-Validation ROC-AUC
 
-Results reported in the accompanying business proposal:
+Results reported in the accompanying business proposal (best model: XGBoost):
 
 * Test ROC-AUC ≈ 0.70
 * Cross-Validation ROC-AUC ≈ 0.703
@@ -237,11 +245,12 @@ The script will:
 
 1. Load and merge customer datasets
 2. Engineer predictive features
-3. Train an XGBoost churn model
-4. Evaluate performance
-5. Generate visualizations
-6. Produce SHAP explanations
-7. Create business-focused churn risk reports
+3. Train and compare Logistic Regression, Random Forest, and XGBoost via cross-validation
+4. Select the best-performing model (XGBoost)
+5. Evaluate performance on the test set
+6. Generate visualizations
+7. Produce SHAP explanations
+8. Create business-focused churn risk reports
 
 ---
 
@@ -261,7 +270,7 @@ The accompanying business proposal estimates that a targeted retention program b
 * Hyperparameter optimization using Optuna
 * Automated model retraining pipeline
 * Real-time churn scoring API
-* Ensemble learning approaches
+* Ensemble learning approaches (e.g., stacking the compared models)
 * Customer lifetime value integration
 * Deployment as a production microservice
 
@@ -271,4 +280,3 @@ The accompanying business proposal estimates that a targeted retention program b
 
 Saumya Vijayvargiya
 
-Customer Churn Prediction using XGBoost, Feature Engineering, Explainable AI (SHAP), and Business-Driven Retention Analytics.
